@@ -1,0 +1,66 @@
+<TMPL_IF name="mt4">
+    <mt:setvarblock name="html_head" append="1">
+        <style type="text/css">
+            .dialog #content-header {
+                height:auto;
+            }
+        </style>
+    </mt:setvarblock>
+    <TMPL_INCLUDE name="dialog/header.tmpl">
+<TMPL_ELSE>
+    <TMPL_INCLUDE name="header.tmpl">
+</TMPL_IF>
+
+<TMPL_IF name="error_text">
+    <div class="field-header">
+        <label id="lblError">
+            <TMPL_IF name="wpstats_blog_id">
+                <MT_TRANS phrase="Your site is already connected to WPStats!  Click the Cancel button to close.">
+            </TMPL_IF>
+            
+            <TMPL_IF name="error_no_api_key">
+                <MT_TRANS phrase="You must include an API Key to connect, or click the Cancel button to close.">
+            </TMPL_IF>
+            
+            <TMPL_IF name="error_no_blog_id">
+                <MT_TRANS phrase="No blog could be loaded with that ID, please try your request again later.">
+            </TMPL_IF>
+        </label><br />
+    </div>
+</TMPL_IF>
+
+<form method="get" action="<$TMPL_VAR name="script_url"$>">
+    <input type="hidden" name="__mode" value="wpstats_connect" />
+    <input type="hidden" name="blog_id" value="<$TMPL_VAR name="blog_id"$>" />
+    <mtapp:setting
+        id="txtVideoName"
+        label_class="top-label"
+        label="<MT_TRANS phrase="Enter Your WordPress.com API Key (Required)">"
+        hint=""
+        show_hint="0">
+        <input type="text" name="api_key" value="<$TMPL_VAR name="api_key"$>" maxlength="32" class="txt" />
+    </mtapp:setting>
+    <p><MT_TRANS phrase="If you don't have a key, you'll need to get one first - just go to wordpress.com and sign up."></p>
+    <p><MT_TRANS phrase="After entering your key, click Connect to create your account."></p>
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                type="submit"
+                accesskey="c"
+                title="<MT_TRANS phrase="Connect">"
+                class="primary-button close"
+                ><MT_TRANS phrase="Connect"></button>
+            <button
+                onclick="closeDialog(); return false"
+                type="button"
+                accesskey="x"
+                class="cancel"
+                title="<MT_TRANS phrase="Cancel (x)">"
+                ><MT_TRANS phrase="Cancel (x)"></button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

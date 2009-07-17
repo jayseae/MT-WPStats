@@ -1,0 +1,40 @@
+<TMPL_IF name="mt4">
+    <mt:setvarblock name="html_head" append="1">
+        <style type="text/css">
+            .dialog #content-header {
+                height:auto;
+            }
+        </style>
+    </mt:setvarblock>
+    <TMPL_INCLUDE name="dialog/header.tmpl">
+<TMPL_ELSE>
+    <TMPL_INCLUDE name="header.tmpl">
+</TMPL_IF>
+
+<form method="get" action="<$TMPL_VAR name="script_url"$>">
+    <TMPL_IF name="error_failed">
+        <div class="field-header">
+            <label id="lblError"><MT_TRANS phrase="Unable to connect to WPStats">: <$TMPL_VAR name="error_failed"$></label>
+        </div>
+    <mt:else>
+        <div class="field-header">
+            <h4><MT_TRANS phrase="Configuration Complete"></h4>
+            <p><MT_TRANS phrase="Visit"> <a href="http://dashboard.wordpress.com/wp-admin/index.php?page=stats&amp;blog=<$TMPL_VAR name="wpstats_blog_id"$>" target="_new"><MT_TRANS phrase="your WordPress.com Dashboard"></a> <MT_TRANS phrase="to see your blog stats."></p>
+        </div>
+    </TMPL_IF>
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                onclick="closeDialog(); return false"
+                type="button"
+                accesskey="x"
+                class="cancel"
+                title="<MT_TRANS phrase="Close (x)">"
+                ><MT_TRANS phrase="Close (x)"></button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
